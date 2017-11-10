@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Aston.Entities": "1.0.0-*",
+    "DocumentFormat.OpenXml": "2.7.2",
+    "EPPlus.Core": "1.5.2",
+    "NETStandard.Library": "2.0.1"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}
