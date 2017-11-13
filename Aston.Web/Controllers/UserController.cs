@@ -44,19 +44,19 @@ namespace Aston.Web.Controllers
         {
             UserLoginViewModel result = new UserLoginViewModel();
             var checkuser = _userManager.Users.Where(p => p.UserName == obj.Username).FirstOrDefault();
-            if(checkuser != null)
+            if (checkuser != null)
             {
-               if(checkuser.IsActive == true)
+                if (checkuser.IsActive == true)
                 {
                     var login = _signInManager.PasswordSignInAsync(obj.Username, obj.Password, false, lockoutOnFailure: false);
-                    if(login.Result.Succeeded)
+                    if (login.Result.Succeeded)
                     {
                         result.result = true;
                         result.DepartmentID = checkuser.DepartmentID;
                         result.Username = checkuser.UserName;
                     }
                 }
-               else
+                else
                 {
                     result.result = false;
                 }
@@ -64,7 +64,7 @@ namespace Aston.Web.Controllers
             else
             {
                 result.result = false;
-            } 
+            }
             HttpResponseMessage response = new HttpResponseMessage();
             response = request.CreateResponse(HttpStatusCode.OK, new { success = result.result, obj = result });
             return response;
@@ -94,21 +94,18 @@ namespace Aston.Web.Controllers
         [Route("UserRegister")]
         public HttpResponseMessage UserRegister(HttpRequestMessage request, [FromBody] RegisterViewModel obj)
         {
-            var user = new ApplicationUser { UserName = obj.Username, Email = obj.Email ,IsActive = true ,DepartmentID = obj.DepartmentID};
+            var user = new ApplicationUser { UserName = obj.Username, Email = obj.Email, IsActive = true, DepartmentID = obj.DepartmentID };
             var result = _userManager.CreateAsync(user, obj.Password);
 
-            //var roles = _roleManager.Roles.ToList();
-            //foreach (var role in roles)
+            // Uncomment to set default role for new user
+            //string defaultRoleName = "user";
+            //if (_roleManager.RoleExistsAsync(defaultRoleName).Result)
             //{
-            //    user.Roles.Add(new IdentityUserRole<string>() { RoleId = role.Id });
+            //    var addUserRole = _userManager.AddToRoleAsync(user, defaultRoleName).Result;
             //}
 
-            //var addUserRole = _userManager.AddToRoleAsync(user, obj.Role);
-
-
             HttpResponseMessage response = new HttpResponseMessage();
-            //response = request.CreateResponse(HttpStatusCode.OK, new { success = result.Result.Succeeded && addUserRole.Result.Succeeded ? true:false, obj = user });
-            response = request.CreateResponse(HttpStatusCode.OK, new { success = result.Result.Succeeded  ? true : false, obj = user });
+            response = request.CreateResponse(HttpStatusCode.OK, new { success = result.Result.Succeeded ? true : false, obj = user });
             return response;
         }
 
@@ -135,7 +132,7 @@ namespace Aston.Web.Controllers
             var update = _userManager.UpdateAsync(user);
 
             HttpResponseMessage response = new HttpResponseMessage();
-            response = request.CreateResponse(HttpStatusCode.OK, new { success = update.Result.Succeeded ? true:false });
+            response = request.CreateResponse(HttpStatusCode.OK, new { success = update.Result.Succeeded ? true : false });
             return response;
         }
 
@@ -147,7 +144,15 @@ namespace Aston.Web.Controllers
             var updateuserrolestatus = false;
             try
             {
-                var addUserRole = _userManager.AddToRoleAsync(user, obj.Role);
+                var currentRole = _userManager.GetRolesAsync(user).Result;
+
+                if (currentRole.Count > 0)
+                {
+                    var removeCurrentRole = _userManager.RemoveFromRoleAsync(user, currentRole.FirstOrDefault()).Result;
+                }
+
+                var addUserRole = _userManager.AddToRoleAsync(user, obj.Role).Result;
+
                 updateuserrolestatus = true;
             }
             catch (Exception ex)

@@ -1,46 +1,32 @@
-﻿using Aston.Business.Utillities;
-using Aston.Entities;
+﻿using Aston.Entities;
 using Aston.Entities.DataContext;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+using Npgsql;
+using Aston.Business.Utillities;
 
 namespace Aston.Business.Data
 {
-    public class DepartmentExtensions
+    public class RoleExtensions
     {
         AstonContext context = new AstonContext();
 
-        public List<Department> GetActiveDepartment()
+        public List<RolePaginationViewModel> GetRole_Pagination(int Skip)
         {
-            var obj = context.Department.Where(p => p.IsActive == true).ToList();
-            return obj;
-        }
+            var result = new List<RolePaginationViewModel>();
+            var obj = new RolePaginationViewModel();
 
-        public Department GetDepartmentByID(int id)
-        {
-            var obj = context.Department.Where(p => p.ID == id).FirstOrDefault();
-            return obj;
-        }
-
-        public List<DepartmentViewModel> GetDepartment_Pagination(int Skip)
-        {
-            var result = new List<DepartmentViewModel>();
-            var obj = new DepartmentViewModel();
-
-            
             using (NpgsqlConnection connection =
             new NpgsqlConnection(ConfigureSetting.GetConnectionString))
             {
                 connection.Open();
 
-                string sql = "sp_departmentpagination";
+                string sql = "sp_rolepagination";
 
 
                 using (NpgsqlCommand command =
@@ -53,7 +39,7 @@ namespace Aston.Business.Data
                     {
                         while (reader.Read())
                         {
-                            result = DataReaderMap.DataReaderMapToList<DepartmentViewModel>(reader);
+                            result = DataReaderMap.DataReaderMapToList<RolePaginationViewModel>(reader);
                         }
                     }
                 }

@@ -5,16 +5,12 @@ using System.Threading.Tasks;
 
 namespace Aston.Entities
 {
-    public class RoleViewModel
+    public class DepartmentViewModel
     {
-        public string Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
-    }
-
-    public class RolePaginationViewModel
-    {
-        public string ID { get; set; }
-        public string Name { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
         public int TotalRow { get; set; }
     }
 }

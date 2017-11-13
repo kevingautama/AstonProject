@@ -38,21 +38,22 @@ namespace Aston.Business
         }
         public LookupList GetLookupByLocationTypeCode(int code)
         {
-           return _pref.GetLookupByLocationTypeCode(code);
+            return _pref.GetLookupByLocationTypeCode(code);
         }
         public LookupList GetLookupByApprovalStatusCode(int code)
         {
             return _pref.GetLookupByApprovalStatusCode(code);
         }
-     
-        public List<Department> GetDepartment()
-        {
-            return _department.GetDepartment();
-        }
 
-        public Department GetDepartmentByID(int id)
-        {
-            return _department.GetDepartmentByID(id);
-        }
+        // Duplicate
+        //public List<Department> GetDepartment()
+        //{
+        //    return _department.GetActiveDepartment();
+        //}
+
+        //public Department GetDepartmentByID(int id)
+        //{
+        //    return _department.GetDepartmentByID(id);
+        //}
     }
 }
