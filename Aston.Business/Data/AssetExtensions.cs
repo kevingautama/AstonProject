@@ -351,10 +351,7 @@ namespace Aston.Business.Data
 
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            result = DataReaderMap.DataReaderMapToList<MismatchReportViewModel>(reader);
-                        }
+                        result = DataReaderMap.DataReaderMapToList<MismatchReportViewModel>(reader);
                     }
                 }
                 connection.Close();

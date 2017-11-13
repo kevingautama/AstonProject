@@ -136,10 +136,7 @@ namespace Aston.Business.Data
 
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            result = DataReaderMap.DataReaderMapToList<HistoryViewModel>(reader);
-                        }
+                        result = DataReaderMap.DataReaderMapToList<HistoryViewModel>(reader);
                     }
                 }
                 connection.Close();

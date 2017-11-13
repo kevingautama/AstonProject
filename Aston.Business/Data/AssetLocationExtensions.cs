@@ -109,10 +109,7 @@ namespace Aston.Business.Data
 
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            result = DataReaderMap.DataReaderMapToList<AssetOpnameTransactionViewModel>(reader);
-                        }
+                        result = DataReaderMap.DataReaderMapToList<AssetOpnameTransactionViewModel>(reader);
                     }
                 }
                 connection.Close();
@@ -141,10 +138,7 @@ namespace Aston.Business.Data
 
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            result = DataReaderMap.DataReaderMapToList<AssetOpnameTransactionViewModel>(reader);
-                        }
+                        result = DataReaderMap.DataReaderMapToList<AssetOpnameTransactionViewModel>(reader);
                     }
                 }
                 connection.Close();

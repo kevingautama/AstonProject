@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aston.Web.Process
 {
-    public class LookupListProcess :ProcessComponent
+    public class LookupListProcess : ProcessComponent
     {
         private readonly AppSetting _serviceSettings;
         public LookupListProcess(IOptions<AppSetting> serviceSettings) : base(serviceSettings)
@@ -44,19 +44,20 @@ namespace Aston.Web.Process
             result = REST(requestUri, RESTConstants.GET);
             return result;
         }
-        public HttpResponseMessage GetDepartmentByID(int id)
-        {
-            HttpResponseMessage result = default(HttpResponseMessage);
-            string requestUri = "api/LookupList/GetDepartmentByID/" + id;
-            result = REST(requestUri, RESTConstants.GET);
-            return result;
-        }
-        public HttpResponseMessage GetDepartment()
-        {
-            HttpResponseMessage result = default(HttpResponseMessage);
-            string requestUri = "api/LookupList/GetDepartment/";
-            result = REST(requestUri, RESTConstants.GET);
-            return result;
-        }
+        // Duplicate
+        //public HttpResponseMessage GetDepartmentByID(int id)
+        //{
+        //    HttpResponseMessage result = default(HttpResponseMessage);
+        //    string requestUri = "api/LookupList/GetDepartmentByID/" + id;
+        //    result = REST(requestUri, RESTConstants.GET);
+        //    return result;
+        //}
+        //public HttpResponseMessage GetDepartment()
+        //{
+        //    HttpResponseMessage result = default(HttpResponseMessage);
+        //    string requestUri = "api/LookupList/GetDepartment/";
+        //    result = REST(requestUri, RESTConstants.GET);
+        //    return result;
+        //}
     }
 }

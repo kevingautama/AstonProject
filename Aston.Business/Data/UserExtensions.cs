@@ -15,8 +15,6 @@ namespace Aston.Business.Data
 {
     public class UserExtensions
     {
-        AstonContext context = new AstonContext();
- 
         public List<UserPaginationViewModel> GetUser_Pagination(int Skip)
         {
             var result = new List<UserPaginationViewModel>();
@@ -38,10 +36,7 @@ namespace Aston.Business.Data
 
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            result =  DataReaderMap.DataReaderMapToList<UserPaginationViewModel>(reader);
-                        }
+                        result =  DataReaderMap.DataReaderMapToList<UserPaginationViewModel>(reader);
                     }
                 }
                 connection.Close();

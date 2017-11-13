@@ -4,6 +4,7 @@
 
 app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $rootScope, $window, transferobjectService, movementrequestResource, lookuplistResource, assetResource, locationResource, assetLocationResource, commonService) {
     var movementrequestResources = new movementrequestResource();
+    var departmentResources = new departmentResource();
     var lookuplistResources = new lookuplistResource();
     var locationResources = new locationResource();
     var assetLocationResources = new assetLocationResource();
@@ -46,7 +47,7 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
         }
     }
 
-    $scope.GetMovementRequest = function(id) {
+    $scope.GetMovementRequest = function (id) {
         var movementrequestResources = new movementrequestResource();
 
         movementrequestResources.$GetMovementRequestByID({ id: id }, function (data) {
@@ -58,7 +59,7 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
         });
     }
 
-    $scope.addvalidationobj = function(obj) {
+    $scope.addvalidationobj = function (obj) {
         angular.forEach(obj, function (data) {
             data.editmode = false;
             data.IsDelete = false;
@@ -67,8 +68,8 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
     }
 
 
-    $scope.GetDepartment = function() {
-        lookuplistResources.$GetDepartment(function(data) {
+    $scope.GetDepartment = function () {
+        departmentResources.$GetActiveDepartments(function (data) {
             $scope.departmentlist = data.obj;
         });
     }
@@ -117,7 +118,7 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
             ID: "temp",
             MovementDate: null,
             Description: null,
-            LocationID:null,
+            LocationID: null,
             //ApprovedDate: null,
             //ApprovedBy: null,
             //MovementRequestDetail: []
@@ -137,15 +138,15 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
             Description: null,
             AssetCategoryCD: null,
             Quantity: null,
-            RequestTo : null,
+            RequestTo: null,
             //editmode:false,
-        //CreatedDate: null,
-        //CreatedBy: null,
-        //IsUpdateDate: null,
-        //IsUpdateBy: null,
-        //IsDeleteDate: null,
-        //IsDeleteBy: null
-    };
+            //CreatedDate: null,
+            //CreatedBy: null,
+            //IsUpdateDate: null,
+            //IsUpdateBy: null,
+            //IsDeleteDate: null,
+            //IsDeleteBy: null
+        };
     }
 
     $scope.Add = function () {
@@ -300,7 +301,7 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
             $scope.onprocess = true;
             var movementrequestResources = new movementrequestResource();
             movementrequestResources.MovementRequest = {
-                ID : $scope.movementrequestobj.MovementRequest.ID,
+                ID: $scope.movementrequestobj.MovementRequest.ID,
                 MovementDate: $scope.movementrequestobj.MovementRequest.MovementDate,
                 Description: $scope.movementrequestobj.MovementRequest.Description,
                 ApprovalStatus: 2,
@@ -357,7 +358,7 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
         $scope.selectedassetlist = [];
         assetLocationResources.$GetAssetLocationByMovementDetailID({ id: obj.ID }, function (data) {
             if (data.success) {
-                angular.forEach(data.obj, function(obj) {
+                angular.forEach(data.obj, function (obj) {
                     $scope.selectedassetlist.push(obj.AssetLocation);
                 });
                 $scope.GetAsset(obj.AssetCategoryCD); // get asset list
@@ -413,9 +414,9 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
         } else {
             $scope.asseterrormessage = 'Please select asset';
         }
-        
+
         //angular.forEach($scope.assetlist, function (asset, index) {
-            
+
         //});
         //var getasset = $filter('filter')($scope.assetlist, function (asset) { return asset.ID == data.ID });
         //if (getasset.length > 0) {
@@ -459,7 +460,7 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
     }
 
     $scope.Approve = function (obj) {
-        
+
         var movementrequestResources = new movementrequestResource();
         movementrequestResources.ID = obj.MovementRequest.ID;
         movementrequestResources.ApprovalStatus = 1;
@@ -492,7 +493,7 @@ app.controller('MovementRequestDetailCtrl', function ($scope, $state, $filter, $
                 }
             });
         }
-        
+
     }
 
     $scope.setToNumberPatern = function (obj) {

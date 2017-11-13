@@ -38,13 +38,13 @@ app.controller('AssetLocationCtrl', function ($scope, $rootScope, assetResource,
         };
     }
 
-    $scope.GetAsset = function() {
+    $scope.GetAsset = function () {
         assetResources.$GetAsset(function (data) {
             $scope.assetlist = data.obj;
         });
     }
 
-    $scope.GetLocation = function() {
+    $scope.GetLocation = function () {
         locationResources.$GetLocation(function (data) {
             $scope.locationlist = data.obj;
         });
@@ -52,9 +52,9 @@ app.controller('AssetLocationCtrl', function ($scope, $rootScope, assetResource,
 
     $scope.init = function () {
         var assetLocationResources = new assetLocationResource();
-        assetLocationResources.$AssetLocation_Pagination({ Skip: $scope.bigCurrentPage-1 }, function (data) {
+        assetLocationResources.$AssetLocation_Pagination({ Skip: $scope.bigCurrentPage - 1 }, function (data) {
             if (data.success) {
-                $scope.NumberofAsset = data.obj.length != 0 ? data.obj[0].AssetLocation.TotalRow : 0;
+                $scope.NumberofLocation = data.obj.length != 0 ? data.obj[0].AssetLocation.TotalRow : 0;
 
                 //$scope.NumberofAsset = data.obj[0].AssetLocation.TotalRow;
                 $scope.assetlocationlist = data.obj;
@@ -82,7 +82,7 @@ app.controller('AssetLocationCtrl', function ($scope, $rootScope, assetResource,
         }
     }
 
-    $scope.CreateAssetLocation = function() {
+    $scope.CreateAssetLocation = function () {
         var assetLocationResources = new assetLocationResource();
         assetLocationResources.AssetID = parseInt($scope.assetlocation.AssetID);
         assetLocationResources.LocationID = parseInt($scope.assetlocation.LocationID);
@@ -95,7 +95,7 @@ app.controller('AssetLocationCtrl', function ($scope, $rootScope, assetResource,
         });
     }
 
-    $scope.edit = function(obj) {
+    $scope.edit = function (obj) {
         $scope.assetlocation = angular.copy(obj);
         $scope.actionstatus = "Update";
         $("#modal-action").modal('show');
@@ -110,7 +110,7 @@ app.controller('AssetLocationCtrl', function ($scope, $rootScope, assetResource,
         }
     }
 
-    $scope.UpdateAssetLocation = function() {
+    $scope.UpdateAssetLocation = function () {
         var assetLocationResources = new assetLocationResource();
         assetLocationResources.ID = $scope.assetlocation.ID;
         assetLocationResources.AssetID = parseInt($scope.assetlocation.AssetID);
@@ -134,7 +134,7 @@ app.controller('AssetLocationCtrl', function ($scope, $rootScope, assetResource,
         $scope.actionstatus = "Delete";
         $("#modal-action").modal('show');
     }
-    $scope.delete = function() {
+    $scope.delete = function () {
         var assetLocationResources = new assetLocationResource();
         assetLocationResources.ID = $scope.assetlocation.ID;
         assetLocationResources.AssetID = parseInt($scope.assetlocation.AssetID);
@@ -149,7 +149,7 @@ app.controller('AssetLocationCtrl', function ($scope, $rootScope, assetResource,
     }
 
     //
-    $scope.selected ="";
+    $scope.selected = "";
     $scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
 
 });

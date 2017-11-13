@@ -37,10 +37,7 @@ namespace Aston.Business.Data
 
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            result = DataReaderMap.DataReaderMapToList<RolePaginationViewModel>(reader);
-                        }
+                        result = DataReaderMap.DataReaderMapToList<RolePaginationViewModel>(reader);
                     }
                 }
                 connection.Close();

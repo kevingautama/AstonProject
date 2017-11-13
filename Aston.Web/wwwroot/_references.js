@@ -17,7 +17,6 @@
 /// <reference path="js/ccsasset/angular-bootstrap/ui-bootstrap.js" />
 /// <reference path="js/ccsasset/angular-bootstrap/ui-bootstrap-tpls.js" />
 /// <reference path="js/ccsasset/angular-breadcrumb/dist/angular-breadcrumb.js" />
-/// <reference path="js/ccsasset/angular-breadcrumb/release/angular-breadcrumb.js" />
 /// <reference path="js/ccsasset/angular-chart.js/angular-chart.js" />
 /// <reference path="js/ccsasset/angular-chart.js/dist/angular-chart.js" />
 /// <reference path="js/ccsasset/angular-chart.js/gulpfile.js" />
@@ -569,7 +568,7 @@
 /// <reference path="js/controllers/master-ctrl.js" />
 /// <reference path="js/controllers/movementrequest-ctrl.js" />
 /// <reference path="js/controllers/movementrequestdetail-ctrl.js" />
-/// <reference path="js/controllers/user-ctrl - copy.js" />
+/// <reference path="js/controllers/role-ctrl.js" />
 /// <reference path="js/controllers/user-ctrl.js" />
 /// <reference path="js/route.js" />
 /// <reference path="js/services/assetlocationresource.js" />

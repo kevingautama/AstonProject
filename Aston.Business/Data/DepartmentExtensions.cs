@@ -34,9 +34,8 @@ namespace Aston.Business.Data
             var result = new List<DepartmentViewModel>();
             var obj = new DepartmentViewModel();
 
-            
             using (NpgsqlConnection connection =
-            new NpgsqlConnection(ConfigureSetting.GetConnectionString))
+           new NpgsqlConnection(ConfigureSetting.GetConnectionString))
             {
                 connection.Open();
 
@@ -51,14 +50,12 @@ namespace Aston.Business.Data
 
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            result = DataReaderMap.DataReaderMapToList<DepartmentViewModel>(reader);
-                        }
+                        result = DataReaderMap.DataReaderMapToList<DepartmentViewModel>(reader);
                     }
                 }
                 connection.Close();
             }
+
             return result;
         }
     }
